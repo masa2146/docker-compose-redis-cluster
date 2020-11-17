@@ -1,0 +1,15 @@
+version: '3'
+services:
+  redis3:
+    build: .
+    ports:
+      - "7002:7002"
+    volumes:
+      - ./docker-data/redis-cluster.tmpl:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      redis1_app_net:
+        ipv4_address: 173.17.0.4
+networks:
+  redis1_app_net:
+    external: true

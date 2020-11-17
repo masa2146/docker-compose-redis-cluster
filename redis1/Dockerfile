@@ -1,6 +1,6 @@
-FROM redis:3.2
+FROM redis:6.0.8
 
-MAINTAINER Johan Andersson <Grokzen@gmail.com>
+MAINTAINER Fatih Bulut <bulutfatih551@gmail.com>
 
 # Some Environment Variables
 ENV HOME /root
@@ -21,7 +21,7 @@ RUN gem install redis -v 3.3.3
 
 RUN apt-get install -y gcc make g++ build-essential libc6-dev tcl git supervisor ruby
 
-ARG redis_version=3.2.9
+ARG redis_version=6.0.8
 
 RUN wget -qO redis.tar.gz http://download.redis.io/releases/redis-${redis_version}.tar.gz \
     && tar xfz redis.tar.gz -C / \
@@ -40,9 +40,9 @@ RUN mkdir /redis-data
 
 # Add startup script
 COPY ./docker-data/docker-entrypoint.sh /docker-entrypoint.sh
-RUN chmod 755 /docker-entrypoint.sh
+RUN chmod 755 /docker-entrypoint.sh 
 
-EXPOSE 7000 7001
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["redis-cluster"]
+ENTRYPOINT ["/docker-entrypoint.sh"  ]
+
+
